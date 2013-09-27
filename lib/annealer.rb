@@ -14,7 +14,7 @@ class Annealer
     
     @repetition_count = opts[:repetition_count] || 1
     
-    @logger = opts[:logger] || Class.new(opts[:log_to]) do
+    @logger = opts[:logger] || Class.new do
       def initialize(log_to)
         @log_to = log_to
       end
@@ -22,7 +22,7 @@ class Annealer
       def info(msg)
         @log_to.puts(msg) if @log_to
       end
-    end
+    end.new(opts[:log_to])
     
     @log_progress_frequency = opts[:log_progress_frequency] || 5000
   end
