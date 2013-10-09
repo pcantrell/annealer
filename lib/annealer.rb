@@ -63,8 +63,8 @@ class Annealer
           state, energy = new_state, new_energy
           if new_energy < best_energy
             best_state, best_energy = state, energy
-            logger.info "New best solution on rep #{rep}, iter #{iter_count}:"
-            p state
+            logger.info "New best solution on rep #{rep}, iter #{iter_count} with energy #{energy}:"
+            logger.info state.inspect
           end
         end
     
