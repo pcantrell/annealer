@@ -1,7 +1,9 @@
 class Annealer
   def initialize(opts = {})
+    max_iter = (opts[:max_iter] || 1000)
+    
     @cooling_func = opts[:cooling_func] || lambda do |iter_count|
-      Math.exp(iter_count / (opts[:cooling_time] || 1000000))
+      Math.exp(-iter_count / (opts[:cooling_time] || max_iter * 1000))
     end
   
     @transition_probability = opts[:transition_probability] || lambda do |e0, e1, temp|
@@ -9,7 +11,7 @@ class Annealer
     end
   
     @stop_condition = opts[:stop_condition] || lambda do |iter_count, best_energy|
-      iter_count > (opts[:max_iter] || 1000)
+      iter_count > max_iter
     end
     
     @repetition_count = opts[:repetition_count] || 1

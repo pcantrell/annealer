@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "annealer"
-  s.version     = "0.0.1"
+  s.version     = "0.2"
   s.authors     = ['Paul Cantrell']
   s.summary     = "Simulated annealing framework"
   s.email       = 'cantrell@pobox.com'
