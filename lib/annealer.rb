@@ -45,7 +45,7 @@ class Annealer
   #      (i.e. "neighbors" should be small changes); at the same time, you don't want it to require
   #      too many hops between any two states.
   #
-  def anneal(start_state)
+  def anneal(start_state, &block)
     best_state = nil
     best_energy = 1 / 0.0
     energy = start_state.energy
@@ -67,6 +67,7 @@ class Annealer
             best_state, best_energy = state, energy
             logger.info "New best solution on rep #{rep}, iter #{iter_count} with energy #{energy}:"
             logger.info state.inspect
+            yield state if block_given?
           end
         end
     
