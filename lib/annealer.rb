@@ -46,13 +46,16 @@ class Annealer
   #      too many hops between any two states.
   #
   def anneal(start_state)
-    best_state = nil
-    best_energy = 1 / 0.0
     energy = start_state.energy
+    best_state = start_state
+    best_energy = energy
+
+    logger.info "Starting state:"
+    logger.info best_state.inspect
     
     @repetition_count.times do |rep|
       logger.info "Repetition #{rep}..." if @repetition_count > 1
-      state = best_state || start_state
+      state = best_state
       
       iter_count = 0
       while !@stop_condition.call(iter_count, best_energy)
